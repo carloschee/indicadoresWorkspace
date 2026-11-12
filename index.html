@@ -6,9 +6,137 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Reporte Workspace Combinado</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <style>body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #F8FAFC; }</style>
+        <style>
+        /* ── TEMA OSCURO GLOBAL ─────────────────────────────────────── */
+        :root {
+            --bg-page:      #0f1117;
+            --bg-card:      #1a1d27;
+            --bg-card-alt:  #21263a;
+            --bg-inset:     #12151f;
+            --border:       #2a2f45;
+            --text-primary: #e8eaf0;
+            --text-muted:   #8891b0;
+            --text-label:   #b0b8d0;
+
+            /* Acentos pastel contrastantes */
+            --accent-blue:    #7eb8f7;   /* azul celeste */
+            --accent-violet:  #b89aff;   /* violeta lavanda */
+            --accent-teal:    #5fe3c0;   /* verde agua */
+            --accent-amber:   #ffd27a;   /* ámbar cálido */
+            --accent-rose:    #ff9eb5;   /* rosa suave */
+            --accent-lime:    #a8e06a;   /* lima fresca */
+            --accent-sky:     #7dd3fc;   /* cielo */
+            --accent-indigo:  #93b4ff;   /* índigo */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-page) !important;
+            color: var(--text-primary) !important;
+        }
+
+        /* Fondo page */
+        .bg-slate-50, .bg-white { background-color: var(--bg-card) !important; }
+        .bg-slate-100           { background-color: var(--bg-inset) !important; }
+
+        /* Sticky header */
+        .bg-white\/95           { background-color: rgba(26,29,39,0.97) !important; }
+
+        /* Texto */
+        .text-slate-900, .text-slate-800 { color: var(--text-primary) !important; }
+        .text-slate-700                  { color: var(--text-label)   !important; }
+        .text-slate-600                  { color: var(--text-label)   !important; }
+        .text-slate-500, .text-slate-400 { color: var(--text-muted)   !important; }
+
+        /* Bordes */
+        .border-slate-200, .border-slate-100 { border-color: var(--border) !important; }
+
+        /* Sombras */
+        .shadow-sm { box-shadow: 0 1px 3px rgba(0,0,0,0.5) !important; }
+
+        /* Badges de fecha */
+        span[style*="background:#334155"] {
+            background: #2a2f45 !important;
+            color: var(--text-label) !important;
+        }
+
+        /* Iconos de app — fondos de chips */
+        .bg-red-50    { background-color: rgba(255,158,181,0.12) !important; }
+        .bg-emerald-50{ background-color: rgba(95,227,192,0.12)  !important; }
+        .bg-yellow-50 { background-color: rgba(255,210,122,0.12) !important; }
+        .bg-blue-50   { background-color: rgba(126,184,247,0.12) !important; }
+        .bg-purple-50 { background-color: rgba(184,154,255,0.12) !important; }
+        .bg-green-50  { background-color: rgba(168,224,106,0.12) !important; }
+        .bg-orange-50 { background-color: rgba(255,210,122,0.12) !important; }
+        .bg-indigo-50 { background-color: rgba(147,180,255,0.12) !important; }
+        .bg-pink-50   { background-color: rgba(255,158,181,0.12) !important; }
+        .bg-teal-50   { background-color: rgba(95,227,192,0.12)  !important; }
+
+        /* Colores de texto de icono */
+        .text-red-500    { color: var(--accent-rose)   !important; }
+        .text-emerald-500{ color: var(--accent-teal)   !important; }
+        .text-yellow-600 { color: var(--accent-amber)  !important; }
+        .text-blue-500   { color: var(--accent-blue)   !important; }
+        .text-blue-600   { color: var(--accent-blue)   !important; }
+        .text-purple-600 { color: var(--accent-violet) !important; }
+        .text-green-600  { color: var(--accent-lime)   !important; }
+        .text-orange-500 { color: var(--accent-amber)  !important; }
+        .text-indigo-600 { color: var(--accent-indigo) !important; }
+        .text-pink-600   { color: var(--accent-rose)   !important; }
+        .text-teal-600   { color: var(--accent-teal)   !important; }
+
+        /* Links */
+        a { color: var(--accent-blue) !important; }
+        a:hover { color: var(--accent-sky) !important; }
+
+        /* Tabs */
+        .tab-btn { background-color: transparent !important; }
+        .tab-btn:hover { background-color: var(--bg-card-alt) !important; color: var(--text-primary) !important; }
+        .border-blue-600 { border-color: var(--accent-blue) !important; }
+        .bg-blue-50.border-blue-600 { background-color: rgba(126,184,247,0.12) !important; }
+
+        /* Tablas */
+        table thead tr { background-color: var(--bg-inset) !important; }
+        table tbody tr { background-color: transparent !important; }
+        table tbody tr:hover { background-color: var(--bg-card-alt) !important; }
+        .border-t.border-slate-100 { border-color: var(--border) !important; }
+
+        /* Código / mono */
+        .text-blue-600.font-mono, span.text-blue-600 { color: var(--accent-teal) !important; }
+
+        /* KPI grandes */
+        .text-6xl, .text-5xl, .text-4xl, .text-3xl { color: var(--text-primary) !important; }
+
+        /* Semáforo — mantener colores propios, solo ajustar fondo */
+        .rounded-full[style*="background-color: #22c55e"],
+        .rounded-full[style*="background-color: #f59e0b"],
+        .rounded-full[style*="background-color: #ef4444"] {
+            box-shadow: 0 0 8px currentColor;
+        }
+
+        /* Barras de progreso vacías */
+        .bg-slate-100.rounded-full { background-color: var(--bg-inset) !important; }
+
+        /* Separador vertical leyenda */
+        .border-l.border-slate-200 { border-color: var(--border) !important; }
+
+        /* Alertas / badges de seguridad */
+        .bg-red-100   { background-color: rgba(255,158,181,0.15) !important; }
+        .bg-yellow-100{ background-color: rgba(255,210,122,0.15) !important; }
+        .bg-green-100 { background-color: rgba(168,224,106,0.15) !important; }
+        .bg-blue-100  { background-color: rgba(126,184,247,0.15) !important; }
+        .text-red-800   { color: var(--accent-rose)   !important; }
+        .text-yellow-800{ color: var(--accent-amber)  !important; }
+        .text-green-800 { color: var(--accent-lime)   !important; }
+        .text-blue-800  { color: var(--accent-blue)   !important; }
+        .text-red-700   { color: var(--accent-rose)   !important; }
+        .text-yellow-700{ color: var(--accent-amber)  !important; }
+        .text-green-700 { color: var(--accent-lime)   !important; }
+
+        /* Colores de las series del gráfico — no tocar, Plotly los maneja */
+        </style>
     </head>
-    <body class="bg-slate-50 text-slate-800">
+    <body class="text-slate-200" style="background-color:#0f1117;">
         <div class="bg-white px-6 pt-8 pb-0">
             <div class="max-w-[1600px] mx-auto">
                 <div class="flex flex-wrap items-center gap-3">
@@ -794,6 +922,36 @@
         <!-- FIN TAB GLOSARIO -->
 
         <script>
+        /* ── Aplica tema oscuro a todos los charts de Plotly ─────── */
+        document.addEventListener('DOMContentLoaded', function() {
+            var darkLayout = {
+                paper_bgcolor: '#1a1d27',
+                plot_bgcolor:  '#1a1d27',
+                font:          { color: '#b0b8d0', family: 'Segoe UI, sans-serif' },
+                xaxis: { gridcolor: '#2a2f45', linecolor: '#2a2f45', zerolinecolor: '#2a2f45' },
+                yaxis: { gridcolor: '#2a2f45', linecolor: '#2a2f45', zerolinecolor: '#2a2f45' },
+                legend: { bgcolor: 'rgba(26,29,39,0.8)', bordercolor: '#2a2f45', borderwidth: 1 },
+            };
+            function patchPlots() {
+                if (!window.Plotly) return;
+                document.querySelectorAll('.plotly-graph-div').forEach(function(div) {
+                    if (!div._fullLayout) return;
+                    // Detectar si tiene ejes secundarios
+                    var update = JSON.parse(JSON.stringify(darkLayout));
+                    if (div._fullLayout.yaxis2) {
+                        update.yaxis2 = { gridcolor: '#2a2f45', linecolor: '#2a2f45', zerolinecolor: '#2a2f45' };
+                    }
+                    Plotly.relayout(div, update);
+                });
+            }
+            // Intentar varias veces hasta que Plotly haya terminado de renderizar
+            setTimeout(patchPlots, 500);
+            setTimeout(patchPlots, 1200);
+            setTimeout(patchPlots, 2500);
+        });
+        </script>
+
+        <script>
         function cambiarTab(tab) {
             // Ocultar todos los paneles
             document.getElementById('tab-indicadores').style.display = 'none';
@@ -815,6 +973,22 @@
             if (window.Plotly) {
                 var plots = document.getElementById('tab-' + tab).querySelectorAll('.plotly-graph-div');
                 plots.forEach(function(plot) { Plotly.Plots.resize(plot); });
+                // Re-aplicar tema oscuro tras resize
+                setTimeout(function() {
+                    var darkLayout = {
+                        paper_bgcolor: '#1a1d27', plot_bgcolor: '#1a1d27',
+                        font: { color: '#b0b8d0' },
+                        xaxis: { gridcolor: '#2a2f45', linecolor: '#2a2f45', zerolinecolor: '#2a2f45' },
+                        yaxis: { gridcolor: '#2a2f45', linecolor: '#2a2f45', zerolinecolor: '#2a2f45' },
+                        legend: { bgcolor: 'rgba(26,29,39,0.8)', bordercolor: '#2a2f45', borderwidth: 1 },
+                    };
+                    plots.forEach(function(div) {
+                        if (!div._fullLayout) return;
+                        var u = JSON.parse(JSON.stringify(darkLayout));
+                        if (div._fullLayout.yaxis2) u.yaxis2 = { gridcolor:'#2a2f45', linecolor:'#2a2f45', zerolinecolor:'#2a2f45' };
+                        Plotly.relayout(div, u);
+                    });
+                }, 150);
             }
         }
         </script>
