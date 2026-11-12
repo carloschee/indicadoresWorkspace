@@ -7,26 +7,45 @@
         <title>Reporte Workspace Combinado</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <style>
-        /* ── TEMA OSCURO GLOBAL ─────────────────────────────────────── */
+        /* ═══════════════════════════════════════════════════════════
+           TEMA OSCURO — Inspiración Eva Unit-01 + estética LCD
+           Paleta: púrpura profundo · verde neón · naranja biomecánico
+           Texto: saturación jerarquizada (+ sat = + importancia)
+        ═══════════════════════════════════════════════════════════ */
         :root {
-            --bg-page:      #0f1117;
-            --bg-card:      #1a1d27;
-            --bg-card-alt:  #21263a;
-            --bg-inset:     #12151f;
-            --border:       #2a2f45;
-            --text-primary: #e8eaf0;
-            --text-muted:   #8891b0;
-            --text-label:   #b0b8d0;
+            --bg-page:      #0d0e16;   /* casi negro azulado */
+            --bg-card:      #13151f;   /* tarjeta base */
+            --bg-card-alt:  #1c1f30;   /* tarjeta hover / alt */
+            --bg-inset:     #0a0b12;   /* inset / thead */
+            --border:       #252840;
 
-            /* Acentos pastel contrastantes */
-            --accent-blue:    #7eb8f7;   /* azul celeste */
-            --accent-violet:  #b89aff;   /* violeta lavanda */
-            --accent-teal:    #5fe3c0;   /* verde agua */
-            --accent-amber:   #ffd27a;   /* ámbar cálido */
-            --accent-rose:    #ff9eb5;   /* rosa suave */
-            --accent-lime:    #a8e06a;   /* lima fresca */
-            --accent-sky:     #7dd3fc;   /* cielo */
-            --accent-indigo:  #93b4ff;   /* índigo */
+            /* Texto — saturación jerarquizada:
+               primario = máx sat (encabezados, KPIs)
+               label    = media sat (etiquetas)
+               muted    = baja sat (hints, fechas) */
+            --text-primary: #e2e6ff;   /* blanco liláceo — máx importancia */
+            --text-label:   #9ba3c8;   /* azul gris — importancia media */
+            --text-muted:   #545878;   /* desat — importancia baja */
+
+            /* Acentos Eva Unit-01 — pastel, contrastantes entre sí */
+            --eva-purple:   #c084fc;   /* púrpura cuerpo */
+            --eva-green:    #4ade80;   /* verde neón extremidades */
+            --eva-orange:   #fb923c;   /* naranja pecho biomecánico */
+            --eva-teal:     #2dd4bf;   /* teal secundario */
+            --eva-amber:    #fbbf24;   /* ámbar LCD */
+            --eva-rose:     #f472b6;   /* rosa/magenta acento */
+            --eva-sky:      #38bdf8;   /* azul cielo HUD */
+            --eva-lime:     #a3e635;   /* lima alerta */
+
+            /* Pills de alta importancia (encabezado) */
+            --pill-hi-bg:   rgba(192,132,252,0.18);
+            --pill-hi-text: #e2d4ff;
+            /* Pills de media importancia */
+            --pill-md-bg:   rgba(45,212,191,0.14);
+            --pill-md-text: #b0f0ea;
+            /* Pills de baja importancia */
+            --pill-lo-bg:   rgba(99,102,120,0.25);
+            --pill-lo-text: #9ba3c8;
         }
 
         body {
@@ -35,108 +54,224 @@
             color: var(--text-primary) !important;
         }
 
-        /* Fondo page */
-        .bg-slate-50, .bg-white { background-color: var(--bg-card) !important; }
-        .bg-slate-100           { background-color: var(--bg-inset) !important; }
+        /* ── Fondos base ─────────────────────────────────────────── */
+        .bg-slate-50, .bg-white { background-color: var(--bg-card)  !important; }
+        .bg-slate-100            { background-color: var(--bg-inset) !important; }
+        .bg-white\/95,
+        .bg-white\/90            { background-color: rgba(19,21,31,0.97) !important; }
 
-        /* Sticky header */
-        .bg-white\/95           { background-color: rgba(26,29,39,0.97) !important; }
+        /* ── Inputs y selects — siempre oscuros ─────────────────── */
+        input, select, textarea {
+            background-color: var(--bg-inset) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border) !important;
+        }
+        input::placeholder { color: var(--text-muted) !important; }
+        select option { background-color: var(--bg-card-alt); color: var(--text-primary); }
 
-        /* Texto */
+        /* ── Texto jerarquizado ──────────────────────────────────── */
         .text-slate-900, .text-slate-800 { color: var(--text-primary) !important; }
-        .text-slate-700                  { color: var(--text-label)   !important; }
-        .text-slate-600                  { color: var(--text-label)   !important; }
+        .text-slate-700, .text-slate-600 { color: var(--text-label)   !important; }
         .text-slate-500, .text-slate-400 { color: var(--text-muted)   !important; }
+        .text-6xl, .text-5xl, .text-4xl, .text-3xl { color: var(--text-primary) !important; }
 
-        /* Bordes */
+        /* ── Bordes y sombras ────────────────────────────────────── */
         .border-slate-200, .border-slate-100 { border-color: var(--border) !important; }
+        .border-l.border-slate-200           { border-color: var(--border) !important; }
+        .border-b.border-slate-200           { border-color: var(--border) !important; }
+        .shadow-sm { box-shadow: 0 1px 6px rgba(0,0,0,0.6) !important; }
 
-        /* Sombras */
-        .shadow-sm { box-shadow: 0 1px 3px rgba(0,0,0,0.5) !important; }
-
-        /* Badges de fecha */
+        /* ── Badges de fecha (inline span style) ────────────────── */
         span[style*="background:#334155"] {
-            background: #2a2f45 !important;
-            color: var(--text-label) !important;
+            background: var(--pill-lo-bg)   !important;
+            color:      var(--pill-lo-text) !important;
         }
 
-        /* Iconos de app — fondos de chips */
-        .bg-red-50    { background-color: rgba(255,158,181,0.12) !important; }
-        .bg-emerald-50{ background-color: rgba(95,227,192,0.12)  !important; }
-        .bg-yellow-50 { background-color: rgba(255,210,122,0.12) !important; }
-        .bg-blue-50   { background-color: rgba(126,184,247,0.12) !important; }
-        .bg-purple-50 { background-color: rgba(184,154,255,0.12) !important; }
-        .bg-green-50  { background-color: rgba(168,224,106,0.12) !important; }
-        .bg-orange-50 { background-color: rgba(255,210,122,0.12) !important; }
-        .bg-indigo-50 { background-color: rgba(147,180,255,0.12) !important; }
-        .bg-pink-50   { background-color: rgba(255,158,181,0.12) !important; }
-        .bg-teal-50   { background-color: rgba(95,227,192,0.12)  !important; }
+        /* ── Pills de API / glosario — SIEMPRE texto claro ──────── */
+        /* Alta importancia: fondo púrpura oscuro */
+        span[style*="background:#EFF6FF"],
+        span[style*="background:#F0FDF4"],
+        span[style*="background:#FDF4FF"],
+        .bg-blue-100.text-blue-700,
+        .rounded-full.bg-blue-100 {
+            background-color: var(--pill-hi-bg)   !important;
+            color:            var(--pill-hi-text) !important;
+        }
+        /* Forzar color claro en pills inline con style directo */
+        span.rounded-full[style],
+        span[class*="rounded-full"][style] {
+            color: var(--text-primary) !important;
+        }
 
-        /* Colores de texto de icono */
-        .text-red-500    { color: var(--accent-rose)   !important; }
-        .text-emerald-500{ color: var(--accent-teal)   !important; }
-        .text-yellow-600 { color: var(--accent-amber)  !important; }
-        .text-blue-500   { color: var(--accent-blue)   !important; }
-        .text-blue-600   { color: var(--accent-blue)   !important; }
-        .text-purple-600 { color: var(--accent-violet) !important; }
-        .text-green-600  { color: var(--accent-lime)   !important; }
-        .text-orange-500 { color: var(--accent-amber)  !important; }
-        .text-indigo-600 { color: var(--accent-indigo) !important; }
-        .text-pink-600   { color: var(--accent-rose)   !important; }
-        .text-teal-600   { color: var(--accent-teal)   !important; }
+        /* ── Código inline ───────────────────────────────────────── */
+        code, .bg-slate-100.px-2 {
+            background-color: var(--bg-inset) !important;
+            color: var(--eva-teal) !important;
+        }
 
-        /* Links */
-        a { color: var(--accent-blue) !important; }
-        a:hover { color: var(--accent-sky) !important; }
+        /* ── Iconos de app chips ─────────────────────────────────── */
+        .bg-red-50    { background-color: rgba(251,146,60,0.12)  !important; }  /* naranja Eva */
+        .bg-emerald-50{ background-color: rgba(74,222,128,0.12)  !important; }  /* verde Eva */
+        .bg-yellow-50 { background-color: rgba(251,191,36,0.12)  !important; }
+        .bg-blue-50   { background-color: rgba(56,189,248,0.12)  !important; }
+        .bg-purple-50 { background-color: rgba(192,132,252,0.12) !important; }
+        .bg-green-50  { background-color: rgba(74,222,128,0.12)  !important; }
+        .bg-orange-50 { background-color: rgba(251,146,60,0.12)  !important; }
+        .bg-indigo-50 { background-color: rgba(129,140,248,0.12) !important; }
+        .bg-pink-50   { background-color: rgba(244,114,182,0.12) !important; }
+        .bg-teal-50   { background-color: rgba(45,212,191,0.12)  !important; }
+        .bg-slate-100.rounded-xl { background-color: rgba(28,31,48,0.8) !important; }
 
-        /* Tabs */
+        /* ── Colores de icono ────────────────────────────────────── */
+        .text-red-500    { color: var(--eva-orange) !important; }
+        .text-emerald-500{ color: var(--eva-green)  !important; }
+        .text-yellow-600 { color: var(--eva-amber)  !important; }
+        .text-blue-500   { color: var(--eva-sky)    !important; }
+        .text-blue-600   { color: var(--eva-sky)    !important; }
+        .text-purple-600 { color: var(--eva-purple) !important; }
+        .text-green-600  { color: var(--eva-green)  !important; }
+        .text-orange-500 { color: var(--eva-orange) !important; }
+        .text-indigo-600 { color: var(--eva-purple) !important; }
+        .text-pink-600   { color: var(--eva-rose)   !important; }
+        .text-teal-600   { color: var(--eva-teal)   !important; }
+
+        /* ── Links ───────────────────────────────────────────────── */
+        a { color: var(--eva-sky) !important; }
+        a:hover { color: var(--eva-teal) !important; }
+
+        /* ── Botones de descarga / acción ────────────────────────── */
+        .bg-blue-50.hover\:bg-blue-100,
+        a.bg-blue-50, button.bg-blue-50 {
+            background-color: var(--pill-hi-bg)   !important;
+            color:            var(--pill-hi-text) !important;
+        }
+
+        /* ── Tabs ────────────────────────────────────────────────── */
         .tab-btn { background-color: transparent !important; }
         .tab-btn:hover { background-color: var(--bg-card-alt) !important; color: var(--text-primary) !important; }
-        .border-blue-600 { border-color: var(--accent-blue) !important; }
-        .bg-blue-50.border-blue-600 { background-color: rgba(126,184,247,0.12) !important; }
+        .border-blue-600 { border-color: var(--eva-purple) !important; }
+        .bg-blue-50.border-blue-600,
+        .tab-btn.border-blue-600 {
+            background-color: rgba(192,132,252,0.10) !important;
+            color: var(--eva-purple) !important;
+        }
+        .text-blue-600.tab-btn, .tab-btn .text-blue-600 { color: var(--eva-purple) !important; }
 
-        /* Tablas */
+        /* ── Tablas ──────────────────────────────────────────────── */
         table thead tr { background-color: var(--bg-inset) !important; }
         table tbody tr { background-color: transparent !important; }
         table tbody tr:hover { background-color: var(--bg-card-alt) !important; }
         .border-t.border-slate-100 { border-color: var(--border) !important; }
 
-        /* Código / mono */
-        .text-blue-600.font-mono, span.text-blue-600 { color: var(--accent-teal) !important; }
+        /* ── Barras de progreso vacías ───────────────────────────── */
+        .bg-slate-100.rounded-full { background-color: #1a1c2a !important; }
 
-        /* KPI grandes */
-        .text-6xl, .text-5xl, .text-4xl, .text-3xl { color: var(--text-primary) !important; }
+        /* ── Semáforos de seguridad ──────────────────────────────── */
+        .rounded-full[style*="background-color: #22c55e"] { box-shadow: 0 0 8px #22c55e88; }
+        .rounded-full[style*="background-color: #f59e0b"] { box-shadow: 0 0 8px #f59e0b88; }
+        .rounded-full[style*="background-color: #ef4444"] { box-shadow: 0 0 8px #ef444488; }
 
-        /* Semáforo — mantener colores propios, solo ajustar fondo */
-        .rounded-full[style*="background-color: #22c55e"],
-        .rounded-full[style*="background-color: #f59e0b"],
-        .rounded-full[style*="background-color: #ef4444"] {
-            box-shadow: 0 0 8px currentColor;
+        /* ── Alertas / badges semánticos — fondo oscuro, texto claro ── */
+        .bg-red-100    { background-color: rgba(251,146,60,0.14)  !important; }
+        .bg-yellow-100 { background-color: rgba(251,191,36,0.14)  !important; }
+        .bg-green-100  { background-color: rgba(74,222,128,0.14)  !important; }
+        .bg-blue-100   { background-color: rgba(56,189,248,0.14)  !important; }
+        .bg-purple-100 { background-color: rgba(192,132,252,0.14) !important; }
+        .bg-orange-100 { background-color: rgba(251,146,60,0.14)  !important; }
+        .text-red-800, .text-red-700     { color: var(--eva-orange) !important; }
+        .text-yellow-800,.text-yellow-700{ color: var(--eva-amber)  !important; }
+        .text-green-800,.text-green-700  { color: var(--eva-green)  !important; }
+        .text-blue-800, .text-blue-700   { color: var(--eva-sky)    !important; }
+        .text-purple-800,.text-purple-700{ color: var(--eva-purple) !important; }
+
+        /* ── Paneles informativos carbono ────────────────────────── */
+        /* Encabezado verde con body oscuro */
+        .bg-green-50 { background-color: rgba(74,222,128,0.10) !important; }
+        .text-green-900 { color: var(--eva-green) !important; }
+        .text-green-800 { color: var(--eva-green) !important; }
+
+        /* Resúmenes estadísticos / tarjetas KPI secundarias */
+        .bg-slate-50 { background-color: var(--bg-card) !important; }
+
+        /* Indicadores km y árboles (texto claro forzado) */
+        .text-slate-800 { color: var(--text-primary) !important; }
+
+        /* ── Leyenda Gmail/Drive/Photos en Indicadores ───────────── */
+        .font-bold.text-slate-700 { color: var(--text-label) !important; }
+
+        /* ── Paneles KPI con inline style backgrounds claros ─────── */
+        /* Rojo/naranja (km Toyota) */
+        div[style*="background:#FEF2F2"],
+        div[style*="background:#FFF7ED"] {
+            background: rgba(251,146,60,0.12) !important;
+            border-color: rgba(251,146,60,0.30) !important;
+        }
+        /* Amarillo (árboles / máximo) */
+        div[style*="background:#FEFCE8"],
+        div[style*="background:#FEF9C3"] {
+            background: rgba(251,191,36,0.12) !important;
+            border-color: rgba(251,191,36,0.30) !important;
+        }
+        /* Verde (árboles/stats) */
+        div[style*="background:#F0FDF4"] {
+            background: rgba(74,222,128,0.10) !important;
+            border-color: rgba(74,222,128,0.25) !important;
         }
 
-        /* Barras de progreso vacías */
-        .bg-slate-100.rounded-full { background-color: var(--bg-inset) !important; }
+        /* Texto en paneles KPI inline (todos deben ser claros) */
+        div[style*="background:#FEF2F2"] p[style*="color"],
+        div[style*="background:#FEF2F2"] p {
+            color: var(--eva-orange) !important;
+        }
+        div[style*="background:#FEFCE8"] p[style*="color"],
+        div[style*="background:#FEFCE8"] p {
+            color: var(--eva-amber) !important;
+        }
+        div[style*="background:#F0FDF4"] p[style*="color"],
+        div[style*="background:#F0FDF4"] p,
+        div[style*="background:#F0FDF4"] .text-2xl {
+            color: var(--eva-green) !important;
+        }
+        div[style*="background:#FEF9C3"] p[style*="color"],
+        div[style*="background:#FEF9C3"] p {
+            color: var(--eva-amber) !important;
+        }
 
-        /* Separador vertical leyenda */
-        .border-l.border-slate-200 { border-color: var(--border) !important; }
+        /* Texto inline en paneles de fecha/warning */
+        div[style*="background:#FFF7ED"] p[style*="color"],
+        div[style*="background:#FFF7ED"] p {
+            color: var(--eva-orange) !important;
+        }
 
-        /* Alertas / badges de seguridad */
-        .bg-red-100   { background-color: rgba(255,158,181,0.15) !important; }
-        .bg-yellow-100{ background-color: rgba(255,210,122,0.15) !important; }
-        .bg-green-100 { background-color: rgba(168,224,106,0.15) !important; }
-        .bg-blue-100  { background-color: rgba(126,184,247,0.15) !important; }
-        .text-red-800   { color: var(--accent-rose)   !important; }
-        .text-yellow-800{ color: var(--accent-amber)  !important; }
-        .text-green-800 { color: var(--accent-lime)   !important; }
-        .text-blue-800  { color: var(--accent-blue)   !important; }
-        .text-red-700   { color: var(--accent-rose)   !important; }
-        .text-yellow-700{ color: var(--accent-amber)  !important; }
-        .text-green-700 { color: var(--accent-lime)   !important; }
+        /* Número KPI grande en carbono (emerald-700) */
+        .text-5xl.text-emerald-700, .text-emerald-700 {
+            color: var(--eva-green) !important;
+        }
+        .text-emerald-200 { color: rgba(74,222,128,0.65) !important; }
+        .bg-emerald-700   { background-color: #064e3b !important; }
 
-        /* Colores de las series del gráfico — no tocar, Plotly los maneja */
+        /* ── Título inline "Apps de terceros" ───────────────────── */
+        p[style*="color:#455A64"] {
+            color: var(--text-label) !important;
+        }
+
+        /* ── Disclaimer Carbono (bg-amber-50) ───────────────────── */
+        .bg-amber-50 {
+            background-color: rgba(251,191,36,0.10) !important;
+        }
+        .text-amber-800 { color: var(--eva-amber) !important; }
+        .border-amber-200 { border-color: rgba(251,191,36,0.30) !important; }
+        .border-emerald-200 { border-color: rgba(74,222,128,0.25) !important; }
+
+        /* ── Código inline — elemento <code> explícito ───────────── */
+        code {
+            background-color: rgba(13,14,22,0.8) !important;
+            color: var(--eva-teal) !important;
+            border: 1px solid rgba(45,212,191,0.2) !important;
+        }
         </style>
     </head>
-    <body class="text-slate-200" style="background-color:#0f1117;">
+    <body class="text-slate-200" style="background-color:#0d0e16;">
         <div class="bg-white px-6 pt-8 pb-0">
             <div class="max-w-[1600px] mx-auto">
                 <div class="flex flex-wrap items-center gap-3">
@@ -402,13 +537,13 @@
   <div style="display:flex;gap:8px;flex-wrap:wrap;padding:0 12px 10px;align-items:center;">
     <input id="oauth_3396500643356227210_search" type="text" placeholder="🔍 Buscar app..."
       oninput="oauthFiltrar('oauth_3396500643356227210')"
-      style="flex:1;min-width:160px;padding:6px 10px;border:1px solid #E2E8F0;border-radius:8px;font-size:13px;outline:none;color:#334155;">
+      style="flex:1;min-width:160px;padding:6px 10px;border:1px solid #252840;border-radius:8px;font-size:13px;outline:none;background:#0a0b12;color:#e2e6ff;">
     <select id="oauth_3396500643356227210_riesgo" onchange="oauthFiltrar('oauth_3396500643356227210')"
-      style="padding:6px 10px;border:1px solid #E2E8F0;border-radius:8px;font-size:13px;color:#334155;background:white;">
+      style="padding:6px 10px;border:1px solid #252840;border-radius:8px;font-size:13px;color:#e2e6ff;background:#0a0b12;">
       <option value="">Todos los niveles</option><option value="BAJO">BAJO</option>
     </select>
     <select id="oauth_3396500643356227210_orden" onchange="oauthOrdenar('oauth_3396500643356227210')"
-      style="padding:6px 10px;border:1px solid #E2E8F0;border-radius:8px;font-size:13px;color:#334155;background:white;">
+      style="padding:6px 10px;border:1px solid #252840;border-radius:8px;font-size:13px;color:#e2e6ff;background:#0a0b12;">
       <option value="auth_desc">↓ Autorizaciones</option>
       <option value="auth_asc">↑ Autorizaciones</option>
       <option value="app_asc">A→Z App</option>
@@ -925,29 +1060,52 @@
         /* ── Aplica tema oscuro a todos los charts de Plotly ─────── */
         document.addEventListener('DOMContentLoaded', function() {
             var darkLayout = {
-                paper_bgcolor: '#1a1d27',
-                plot_bgcolor:  '#1a1d27',
-                font:          { color: '#b0b8d0', family: 'Segoe UI, sans-serif' },
-                xaxis: { gridcolor: '#2a2f45', linecolor: '#2a2f45', zerolinecolor: '#2a2f45' },
-                yaxis: { gridcolor: '#2a2f45', linecolor: '#2a2f45', zerolinecolor: '#2a2f45' },
-                legend: { bgcolor: 'rgba(26,29,39,0.8)', bordercolor: '#2a2f45', borderwidth: 1 },
+                paper_bgcolor: '#13151f',
+                plot_bgcolor:  '#13151f',
+                font:          { color: '#9ba3c8', family: 'Segoe UI, sans-serif' },
+                xaxis: { gridcolor: '#252840', linecolor: '#252840', zerolinecolor: '#252840', tickfont: { color: '#9ba3c8' } },
+                yaxis: { gridcolor: '#252840', linecolor: '#252840', zerolinecolor: '#252840', tickfont: { color: '#9ba3c8' } },
+                legend: { bgcolor: 'rgba(19,21,31,0.9)', bordercolor: '#252840', borderwidth: 1, font: { color: '#9ba3c8' } },
             };
+
+            /* Colorscale para el heatmap de Anomalías:
+               valor 0 (sin incidentes) → fondo oscuro del card
+               valor alto → rojo intenso Eva-orange                */
+            var anomaliasColorscale = [
+                [0.0,  '#13151f'],   /* fondo oscuro — sin incidentes */
+                [0.05, '#1a1f35'],   /* casi nada */
+                [0.15, '#2d1f4a'],   /* muy poco — púrpura oscuro */
+                [0.30, '#5b1f8a'],   /* leve — púrpura medio */
+                [0.50, '#9333ea'],   /* moderado — púrpura Eva */
+                [0.70, '#f97316'],   /* alto — naranja Eva */
+                [0.85, '#ef4444'],   /* muy alto — rojo */
+                [1.0,  '#c62828'],   /* máximo — rojo oscuro */
+            ];
+
             function patchPlots() {
                 if (!window.Plotly) return;
                 document.querySelectorAll('.plotly-graph-div').forEach(function(div) {
-                    if (!div._fullLayout) return;
-                    // Detectar si tiene ejes secundarios
+                    if (!div._fullData || !div._fullLayout) return;
+
+                    // Patchear layout oscuro
                     var update = JSON.parse(JSON.stringify(darkLayout));
                     if (div._fullLayout.yaxis2) {
-                        update.yaxis2 = { gridcolor: '#2a2f45', linecolor: '#2a2f45', zerolinecolor: '#2a2f45' };
+                        update.yaxis2 = { gridcolor: '#252840', linecolor: '#252840', zerolinecolor: '#252840', tickfont: { color: '#9ba3c8' }, showgrid: false };
                     }
                     Plotly.relayout(div, update);
+
+                    // Detectar si es el heatmap de Anomalías y patchear colorscale
+                    div._fullData.forEach(function(trace, i) {
+                        if (trace.type === 'heatmap') {
+                            Plotly.restyle(div, { colorscale: [anomaliasColorscale] }, [i]);
+                        }
+                    });
                 });
             }
             // Intentar varias veces hasta que Plotly haya terminado de renderizar
             setTimeout(patchPlots, 500);
             setTimeout(patchPlots, 1200);
-            setTimeout(patchPlots, 2500);
+            setTimeout(patchPlots, 2800);
         });
         </script>
 
@@ -975,18 +1133,26 @@
                 plots.forEach(function(plot) { Plotly.Plots.resize(plot); });
                 // Re-aplicar tema oscuro tras resize
                 setTimeout(function() {
-                    var darkLayout = {
-                        paper_bgcolor: '#1a1d27', plot_bgcolor: '#1a1d27',
-                        font: { color: '#b0b8d0' },
-                        xaxis: { gridcolor: '#2a2f45', linecolor: '#2a2f45', zerolinecolor: '#2a2f45' },
-                        yaxis: { gridcolor: '#2a2f45', linecolor: '#2a2f45', zerolinecolor: '#2a2f45' },
-                        legend: { bgcolor: 'rgba(26,29,39,0.8)', bordercolor: '#2a2f45', borderwidth: 1 },
+                    var anomaliasCS = [
+                        [0.0,'#13151f'],[0.05,'#1a1f35'],[0.15,'#2d1f4a'],
+                        [0.30,'#5b1f8a'],[0.50,'#9333ea'],[0.70,'#f97316'],
+                        [0.85,'#ef4444'],[1.0,'#c62828']
+                    ];
+                    var darkL = {
+                        paper_bgcolor: '#13151f', plot_bgcolor: '#13151f',
+                        font: { color: '#9ba3c8', family: 'Segoe UI, sans-serif' },
+                        xaxis: { gridcolor: '#252840', linecolor: '#252840', zerolinecolor: '#252840', tickfont: { color: '#9ba3c8' } },
+                        yaxis: { gridcolor: '#252840', linecolor: '#252840', zerolinecolor: '#252840', tickfont: { color: '#9ba3c8' } },
+                        legend: { bgcolor: 'rgba(19,21,31,0.9)', bordercolor: '#252840', borderwidth: 1, font: { color: '#9ba3c8' } },
                     };
                     plots.forEach(function(div) {
-                        if (!div._fullLayout) return;
-                        var u = JSON.parse(JSON.stringify(darkLayout));
-                        if (div._fullLayout.yaxis2) u.yaxis2 = { gridcolor:'#2a2f45', linecolor:'#2a2f45', zerolinecolor:'#2a2f45' };
+                        if (!div._fullData || !div._fullLayout) return;
+                        var u = JSON.parse(JSON.stringify(darkL));
+                        if (div._fullLayout.yaxis2) u.yaxis2 = { gridcolor:'#252840', linecolor:'#252840', zerolinecolor:'#252840', tickfont:{color:'#9ba3c8'}, showgrid:false };
                         Plotly.relayout(div, u);
+                        div._fullData.forEach(function(trace, i) {
+                            if (trace.type === 'heatmap') Plotly.restyle(div, { colorscale: [anomaliasCS] }, [i]);
+                        });
                     });
                 }, 150);
             }
