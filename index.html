@@ -60,6 +60,41 @@
         .bg-white\/95,
         .bg-white\/90            { background-color: rgba(19,21,31,0.97) !important; }
 
+        /* ── Tabla OAuth — filas inline styles ──────────────────── */
+        /* thead sticky */
+        tr[style*="background:#F8FAFC"] {
+            background: var(--bg-inset) !important;
+        }
+        /* separador de fila */
+        tr[style*="border-bottom:1px solid #F1F5F9"] {
+            border-bottom-color: var(--border) !important;
+        }
+        /* nombre de app y número autorizaciones — color:#334155 */
+        td[style*="color:#334155"] {
+            color: var(--text-label) !important;
+        }
+        /* número de autorizaciones — color:#1E293B */
+        td[style*="color:#1E293B"] {
+            color: var(--text-primary) !important;
+        }
+
+        /* badge riesgo BAJO (verde claro → verde oscuro) */
+        span[style*="background:#E8F5E9"] {
+            background: rgba(74,222,128,0.15) !important;
+            color: var(--eva-green) !important;
+        }
+        /* badge riesgo MEDIO / ALTO si existen */
+        span[style*="background:#FFF8E1"],
+        span[style*="background:#FFF3E0"] {
+            background: rgba(251,191,36,0.15) !important;
+            color: var(--eva-amber) !important;
+        }
+        span[style*="background:#FFEBEE"],
+        span[style*="background:#FCE4EC"] {
+            background: rgba(251,146,60,0.15) !important;
+            color: var(--eva-orange) !important;
+        }
+
         /* ── Inputs y selects — siempre oscuros ─────────────────── */
         input, select, textarea {
             background-color: var(--bg-inset) !important;
